@@ -18,6 +18,7 @@ firmware/eclipse_build/*
 /pico-sdk
 /build
 .vscode
+*.uf2
 
 # Ignore all markdown files except key docs
 *.md

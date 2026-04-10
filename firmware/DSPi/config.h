@@ -32,6 +32,16 @@ extern volatile uint32_t nominal_feedback_10_14;
 
 #define ENABLE_SUB 1
 
+// I2C / UART API
+#define ENABLE_API             1
+
+// I2C/UART Output Pins
+#define PICO_I2C_SDA_PIN       0
+#define PICO_I2C_SCK_PIN       1  
+
+#define PICO_UART_TX_PIN       16
+#define PICO_UART_RX_PIN       17
+
 // S/PDIF Output Pins
 #undef PICO_AUDIO_SPDIF_PIN
 #define PICO_AUDIO_SPDIF_PIN   6    // S/PDIF 1 (Out 1-2)
@@ -188,6 +198,8 @@ extern volatile uint32_t nominal_feedback_10_14;
 // Buffer statistics
 #define REQ_GET_BUFFER_STATS        0xB0
 #define REQ_RESET_BUFFER_STATS      0xB1
+
+#define REQ_GET_LOG                 0x04        // For UART/I2C push logs
 
 // Preset configuration
 #define PRESET_SLOTS                10

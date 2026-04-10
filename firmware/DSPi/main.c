@@ -25,6 +25,10 @@
 #include "bulk_params.h"
 #include "pico/audio_spdif.h"
 
+#if ENABLE_API
+#include "api/api.h"
+#endif
+
 // ----------------------------------------------------------------------------
 // GLOBAL DEFINITIONS
 // ----------------------------------------------------------------------------
@@ -276,6 +280,10 @@ int main(void) {
 
     // Enable watchdog
     watchdog_enable(8000, 1);
+
+#if ENABLE_API
+    api_init();
+#endif
 
     while (1) {
         // Update watchdog

@@ -29,6 +29,9 @@ add_executable(DSPi
     usb_audio.h
     usb_descriptors.c
     usb_descriptors.h
+    api/api.c
+    api/uart.c
+    api/i2c.c
 )
 
 if (PICO_PLATFORM STREQUAL "rp2040")
@@ -40,6 +43,7 @@ pico_set_binary_type(DSPi copy_to_ram)
 target_include_directories(DSPi PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/lufa
+    ${CMAKE_CURRENT_SOURCE_DIR}/api
 )
 
 target_compile_definitions(DSPi PRIVATE
@@ -64,8 +68,15 @@ target_link_libraries(DSPi
     hardware_pwm
     hardware_flash
     hardware_adc
+    hardware_i2c
+    hardware_uart
     pico_audio_spdif_multi
     usb_device
 )
 
 pico_add_extra_outputs(DSPi)
+
+# Create a custom command to copy the binary
+add_custom_command(TARGET DSPi POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/DSPi.uf2 ${CMAKE_SOURCE_DIR}/../DSPi-${PICO_BOARD}.uf2
+)
